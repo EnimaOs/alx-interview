@@ -1,26 +1,23 @@
 #!/usr/bin/python3
-"""_summary_
+"""
+Main file for testing
 """
 
 
-def makeChange(coins, total):
-    """_summary_
-
-    Args:
-        coins (_type_): _description_
-        total (_type_): _description_
-
-    Returns:
-        _type_: _description_
+def makeChange(coins, amount):
     """
-    if total <= 0 or len(coins) == 0:
+    How many of this type of coin can I get with my money? Okay,
+        I'll take that many. Now, how much money do I have left?
+        And how many coins do I have in my pocket?
+    """
+    if amount < 1:
         return 0
-
     coins.sort(reverse=True)
     count = 0
-    for i in coins:
-        count += total // i
-        total = total % i
-    if total != 0:
-        return -1
-    return count
+    for coin in coins:
+        if amount == 0:
+            break
+        num = amount // coin
+        amount -= num * coin
+        count += num
+    return count if amount == 0 else -1
